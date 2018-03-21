@@ -1,3 +1,4 @@
+
 var ipfsAPI = require('ipfs-api');
 
 
@@ -20,11 +21,16 @@ export function uploadFile(fileContent) {
         //         content: buffer
         //     });
 
-            ipfs.add(content, (err, res) => {
-                if (err)
+            ipfs.add(new Buffer(fileContent,"binary"), (err, res) => {
+                if (err){
+                    console.log(err);
                     reject(err);
-                else
+                    
+                }
+                else{
+                    console.log(res[0].hash);
                     resolve(res[0].hash);
+                }
             });
        // }
      });
@@ -33,5 +39,19 @@ export function uploadFile(fileContent) {
 
 
         export function downloadFile(fileAddress) {
-            return "the file";
+            return new Promise((resolve, reject) => {
+
+                ipfs.files.cat(fileAddress,(err, file)=>{
+
+                    if(err){
+                        debugger;
+                        reject(err);
+                    }
+                    else{
+                        debugger;
+                        resolve(file);
+                    }
+
+                })           
+            });
         }

@@ -2,7 +2,7 @@ export function generateSharedKey(){
      return "SharedKey";
 }
 export function encrypt(plainText, key){
-     return "The encrypted file";
+     return plainText;
 }
 
 export function decrypt(encryptedText, key){
